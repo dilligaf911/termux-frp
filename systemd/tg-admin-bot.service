@@ -1,0 +1,22 @@
+[Unit]
+Description=Safe Telegram Admin Bot MVP
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=botuser
+Group=botuser
+WorkingDirectory=/opt/tg-admin-bot
+EnvironmentFile=/opt/tg-admin-bot/.env
+ExecStart=/opt/tg-admin-bot/.venv/bin/python -m tg_admin_bot.bot
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/tg-admin-bot/data
+
+[Install]
+WantedBy=multi-user.target
